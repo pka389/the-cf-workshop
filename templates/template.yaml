@@ -13,6 +13,11 @@ Resources:
           CidrIp: 0.0.0.0/0
           FromPort: 80
           ToPort: 80
+        -
+          IpProtocol: tcp
+          CidrIp: 0.0.0.0/0
+          FromPort: 22
+          ToPort: 22
   webserver:
     Type: AWS::EC2::Instance
     Metadata:
@@ -38,5 +43,5 @@ Resources:
         !Sub |
           #!/bin/bash -xe
           yum install -y aws-cfn-bootstrap
-          /opt/bin/aws/cfn-init -s ${AWS::StackId} -r webserver  --region ${AWS::Region}
+          /opt/aws/bin/cfn-init -s ${AWS::StackId} -r webserver  --region ${AWS::Region}
      KeyName: pka
